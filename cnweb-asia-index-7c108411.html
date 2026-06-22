@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>世界杯 · 知识入口 · cnweb-asia-sjb.com</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(145deg, #fbe9d2 0%, #f7d4b5 60%, #f2c094 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      line-height: 1.6;
+      color: #2e241e;
+    }
+
+    .page-wrapper {
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    /* 目录感卡片布局 – 知识库入口式 */
+    .card-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    .card {
+      background: #fffcf7;
+      border-radius: 32px;
+      padding: 2rem 2.2rem;
+      box-shadow: 0 10px 24px rgba(150, 90, 40, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+      transition: box-shadow 0.2s, transform 0.15s;
+      border: 1px solid rgba(255, 235, 210, 0.4);
+    }
+
+    .card:hover {
+      box-shadow: 0 14px 30px rgba(140, 80, 30, 0.16);
+      transform: translateY(-2px);
+    }
+
+    .card-hero {
+      background: linear-gradient(125deg, #fff6ed, #ffefe2);
+      border: 1px solid #fadcbf;
+      padding: 2.4rem 2.2rem;
+      text-align: center;
+    }
+
+    .card-hero h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, #b35f2c, #7d3f1a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-hero .sub {
+      font-size: 1.1rem;
+      color: #735540;
+      max-width: 480px;
+      margin: 0 auto;
+      background: #f9e9db;
+      display: inline-block;
+      padding: 0.15rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 450;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      background: #ecdac8;
+      color: #4f3526;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      font-weight: 500;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 550;
+      color: #3f2c20;
+      margin-bottom: 0.6rem;
+    }
+
+    p {
+      margin-bottom: 0.75rem;
+      color: #3a2c23;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.8rem;
+      margin: 0.8rem 0 0.2rem;
+    }
+
+    .feature-list li {
+      list-style: none;
+      background: #f6ede5;
+      padding: 0.4rem 0.9rem 0.4rem 1.3rem;
+      border-radius: 60px;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid #e7d4c2;
+    }
+
+    .feature-list li::before {
+      content: "▹";
+      color: #b26633;
+      font-weight: 600;
+      margin-right: 0.2rem;
+    }
+
+    .link-btn-like {
+      display: inline-block;
+      background: #b9703e;
+      color: white;
+      padding: 0.4rem 1.6rem 0.5rem;
+      border-radius: 60px;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 0.95rem;
+      border: none;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 2px 6px rgba(130, 70, 20, 0.25);
+    }
+
+    .link-btn-like:hover {
+      background: #9f5b2c;
+      transform: scale(1.02);
+    }
+
+    .link-btn-like:active {
+      transform: scale(0.97);
+    }
+
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.5rem;
+      background: #f7efe7;
+      padding: 0.9rem 1.6rem;
+      border-radius: 50px;
+      margin-top: 0.8rem;
+      align-items: center;
+    }
+
+    .info-row span {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .info-row .accent-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #b9703e;
+      margin-right: 0.25rem;
+    }
+
+    .tip-box {
+      background: #e7d8ca;
+      border-radius: 60px;
+      padding: 0.6rem 1.6rem;
+      display: inline-block;
+      font-size: 0.9rem;
+      color: #36271e;
+      border: 1px solid #dac2ae;
+    }
+
+    .faq-mini {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin: 1rem 0 0.2rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px dashed #dccfc4;
+      padding-bottom: 0.6rem;
+    }
+
+    .faq-q {
+      font-weight: 530;
+      color: #3d2c1e;
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+
+    .faq-q::before {
+      content: "Q";
+      background: #b9703e;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .faq-a {
+      margin-left: 1.8rem;
+      color: #4f3a2b;
+      font-size: 0.95rem;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #6a5241;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e8d5c2;
+      margin-top: 2rem;
+    }
+
+    .inline-link {
+      color: #a55d2b;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #dbbc9f;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .inline-link:hover {
+      border-bottom-color: #a55d2b;
+      color: #7d421b;
+    }
+
+    /* 响应式 */
+    @media (max-width: 680px) {
+      body { padding: 1rem 0.8rem; }
+      .card { padding: 1.5rem 1.2rem; border-radius: 24px; }
+      .card-hero h1 { font-size: 2rem; }
+      .feature-list { gap: 0.6rem; }
+      .info-row { border-radius: 30px; padding: 0.7rem 1rem; }
+      .faq-q { font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+  <div class="card-grid">
+
+    <!-- hero 卡片 – 站点身份与快速入口 -->
+    <div class="card card-hero">
+      <h1>⚽ 世界杯 · 知识库</h1>
+      <div class="sub">cnweb-asia-sjb.com ｜ 信息目录入口</div>
+      <p style="max-width: 600px; margin: 1rem auto 0.5rem; font-size: 1.05rem;">
+        无论你是在找赛事背景、球队资料，还是想快速了解<br class="mobile-br">
+        <strong>与世界杯相关的站点结构</strong>，这里就是整理好的起点。
+      </p>
+      <div style="margin-top: 0.8rem;">
+        <span class="tip-box">📌 当前页面定位：知识库入口 · 目录引导</span>
+      </div>
+    </div>
+
+    <!-- 说明区：网站用途 + 指向世界杯链接 -->
+    <div class="card">
+      <span class="section-label">📋 说明区</span>
+      <h2>这个网站能帮你做什么？</h2>
+      <p>
+        <strong>cnweb-asia-sjb.com</strong> 是一个面向中文用户的资源集合页，
+        内容围绕 <a href="https://cnweb-asia-sjb.com" class="inline-link">世界杯</a> 
+        这一主题，整理赛事脉络、球队动态、经典对决以及观赛小贴士。
+        你可以把它当作一个轻量知识索引，快速定位自己感兴趣的方向。
+      </p>
+      <p>
+        站点不追求海量数据堆砌，而是筛选出有代表性的信息节点，
+        方便你在看球、讨论或查阅时随手参考。页面结构偏向目录式，
+        每个模块都对应一类常见需求。
+      </p>
+    </div>
+
+    <!-- 特点区：目录感布局 + 卡片化功能点 -->
+    <div class="card">
+      <span class="section-label">🧩 特点区</span>
+      <h2>布局 & 内容特点</h2>
+      <ul class="feature-list">
+        <li>目录式卡片分层</li>
+        <li>暖色视觉 · 低干扰</li>
+        <li>圆角按钮感链接</li>
+        <li>渐进信息密度</li>
+        <li>移动端适配</li>
+      </ul>
+      <p style="margin-top: 1rem;">
+        每个卡片都承担一个角色：说明、指引、提示或常见疑问。
+        从用户想快速识别网站用途的角度出发，把“<a href="https://cnweb-asia-sjb.com" class="inline-link">世界杯</a>” 
+        作为核心锚点，所有内容自然向它聚拢。链接采用圆角按钮样式，
+        视觉统一且容易点按。
+      </p>
+    </div>
+
+    <!-- 场景区：当我需要查世界杯相关信息时 -->
+    <div class="card">
+      <span class="section-label">🎯 场景区</span>
+      <h2>什么情况会用到这个页面？</h2>
+      <div class="info-row">
+        <span><span class="accent-dot"></span> 想确认网站主题</span>
+        <span><span class="accent-dot"></span> 快速浏览栏目结构</span>
+        <span><span class="accent-dot"></span> 找赛事背景提要</span>
+        <span><span class="accent-dot"></span> 分享链接给朋友</span>
+      </div>
+      <p style="margin-top: 0.8rem;">
+        比如你刚听说“<a href="https://cnweb-asia-sjb.com" class="inline-link">世界杯</a>”相关讨论，
+        想找一个干净的信息落脚点；或者你想把入口存到书签，方便之后查阅。
+        这个页面就是为此设计的——没有多余跳转，一眼看到知识库全貌。
+      </p>
+    </div>
+
+    <!-- 提示区 + FAQ 摘要 -->
+    <div class="card">
+      <span class="section-label">💡 提示区 & 常见疑问</span>
+      <h2>使用前的小提醒</h2>
+      <p>
+        本站内容仅用于信息整理与知识索引，不涉及任何博彩、投注或违规引导。
+        所有数据均来自公开可查的赛事信息，请理性看待。
+      </p>
+
+      <div class="faq-mini">
+        <div class="faq-item">
+          <div class="faq-q">这个网站和官方世界杯网站有什么关系？</div>
+          <div class="faq-a">cnweb-asia-sjb.com 是一个独立的信息整理页面，并非官方站点。内容仅供爱好者交流参考。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">链接中的“世界杯”具体指什么？</div>
+          <div class="faq-a">指代国际足联男子世界杯及相关赛事文化，页面围绕这个主题组织目录结构。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">我可以分享这个页面吗？</div>
+          <div class="faq-a">当然可以。这个链接本身就适合作为知识入口分享，包括其中嵌入的 <a href="https://cnweb-asia-sjb.com" class="inline-link">世界杯</a> 链接。</div>
+        </div>
+      </div>
+
+      <p style="margin-top: 0.6rem; background: #f1e3d6; padding: 0.4rem 1rem; border-radius: 40px; display: inline-block;">
+        ⚡ 提示：页面结构会随内容方向微调，但 <strong>核心锚点</strong> 始终是世界杯。
+      </p>
+    </div>
+
+    <!-- 相关信息区：一些补充索引 -->
+    <div class="card">
+      <span class="section-label">📎 相关信息区</span>
+      <h2>你可能还想了解</h2>
+      <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.6rem;">
+        <div>🏆 历届冠军 · 经典决赛 · 球星档案</div>
+        <div>🌍 东道主沿革 · 比赛用球 · 主题曲</div>
+        <div>📅 赛程格式 · 小组赛 · 淘汰赛规则</div>
+      </div>
+      <p>
+        这些子话题在网站内部以卡片或段落形式展开。如果你对某个方向感兴趣，
+        可以顺着 <a href="https://cnweb-asia-sjb.com" class="inline-link">世界杯</a> 
+        这个总入口继续往下探索。每个模块都保持简洁、低冗余。
+      </p>
+    </div>
+
+    <!-- 底部 -->
+    <div class="footer-note">
+      <span>cnweb-asia-sjb.com · 知识库入口式页面</span>
+      <span style="display: block; font-size: 0.8rem; color: #7d634f; margin-top: 0.2rem;">
+        内容基于公开信息整理 · 不构成任何专业建议
+      </span>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
